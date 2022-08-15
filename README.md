@@ -1,6 +1,7 @@
-# Train CIFAR10 with PyTorch
+# Train CIFAR10 with PyTorch and PyTorch Lightning
 
-I'm playing with [PyTorch](http://pytorch.org/) on the CIFAR10 dataset.
+Code forked from https://github.com/kuangliu/pytorch-cifar
+Added PyTorch Lightning training loop
 
 ## Prerequisites
 - Python 3.6+
