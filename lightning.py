@@ -66,16 +66,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='PyTorch CIFAR10 Training')
     parser.add_argument('--model', default="resnet18", type=str, help='select model')
     parser.add_argument('--lr', default=0.1, type=float, help='learning rate')
+    parser.add_argument('--batch_size', "-bs", default=128, type=int, help='batch size')
+    parser.add_argument('--n_workers', "-nw", default=4, type=int, help='number of workers')
     args = parser.parse_args()
 
-    batch_size = 128
-    n_workers = 4
-
-    train_loader = get_train_loader()
-    val_loader = get_test_loader()
+    train_loader = get_train_loader(args.batch_size, args.n_workers)
+    test_loader = get_test_loader(args.batch_size, args.n_workers)
     
     module = Classify(args.model, args.lr)
 
     lr_monitor = LearningRateMonitor(logging_interval='step')
     trainer = pl.Trainer(accelerator="gpu", gpus=1, callbacks=[lr_monitor])
-    trainer.fit(module, train_loader, val_loader)
+    trainer.fit(module, train_loader, test_loader)
