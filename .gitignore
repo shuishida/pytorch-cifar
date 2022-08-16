@@ -142,3 +142,4 @@ data/*
 **/lightning_logs
 **/logs
 **/outputs
+**/checkpoint
